@@ -52,6 +52,8 @@
     <Compile Include="CommandHandlers\BasketballTeamCreateCommandHandler.cs" />
     <Compile Include="CommandHandlers\BasketballTeamEditCommandHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandler.cs" />
+    <Compile Include="CommandHandlers\PlayerCreateCommandHandler.cs" />
+    <Compile Include="CommandHandlers\PlayerEditCommandHandler.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\ICommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

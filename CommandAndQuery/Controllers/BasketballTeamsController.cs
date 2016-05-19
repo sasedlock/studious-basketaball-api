@@ -43,34 +43,6 @@ namespace CommandAndQuery.Controllers
             _editCommandHandler.Handle(editCommand);
 
             return StatusCode(HttpStatusCode.NoContent);
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            //if (id != basketballTeam.Id)
-            //{
-            //    return BadRequest();
-            //}
-
-            //db.Entry(basketballTeam).State = EntityState.Modified;
-
-            //try
-            //{
-            //    db.SaveChanges();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!BasketballTeamExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
         }
 
         // POST: api/BasketballTeams

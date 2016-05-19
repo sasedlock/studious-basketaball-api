@@ -50,6 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasketballContext.cs" />
+    <Compile Include="Migrations\201605182324061_InitialCreate.cs" />
+    <Compile Include="Migrations\201605182324061_InitialCreate.Designer.cs">
+      <DependentUpon>201605182324061_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605190314571_UpdatingPlayerToMakeBasketballFkNullable.cs" />
+    <Compile Include="Migrations\201605190314571_UpdatingPlayerToMakeBasketballFkNullable.Designer.cs">
+      <DependentUpon>201605190314571_UpdatingPlayerToMakeBasketballFkNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +70,14 @@
       <Project>{3F3492CF-8DB4-4887-A060-DF5321E3CFD8}</Project>
       <Name>CommandAndQuery.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605182324061_InitialCreate.resx">
+      <DependentUpon>201605182324061_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605190314571_UpdatingPlayerToMakeBasketballFkNullable.resx">
+      <DependentUpon>201605190314571_UpdatingPlayerToMakeBasketballFkNullable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
