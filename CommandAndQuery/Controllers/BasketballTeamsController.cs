@@ -12,10 +12,10 @@ namespace CommandAndQuery.Controllers
 {
     public class BasketballTeamsController : ApiController
     {
-        private BasketballContext db = new BasketballContext();
-
-        private BasketballTeamEditCommandHandler _editCommandHandler = new BasketballTeamEditCommandHandler();
-        private BasketballTeamCreateCommandHandler _createCommandHandler = new BasketballTeamCreateCommandHandler();
+        private readonly BasketballContext db = new BasketballContext();
+        private readonly BasketballTeamEditCommandHandler _editCommandHandler = new BasketballTeamEditCommandHandler();
+        private readonly BasketballTeamCreateCommandHandler _createCommandHandler = new BasketballTeamCreateCommandHandler();
+        private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler = new AddPlayerToTeamCommandHandler();
 
         // GET: api/BasketballTeams
         public IQueryable<BasketballTeam> GetTeams()
@@ -77,6 +77,16 @@ namespace CommandAndQuery.Controllers
             db.SaveChanges();
 
             return Ok(basketballTeam);
+        }
+
+        [HttpPost]
+        [Route("api/basketballteams/addplayertoteam")]
+        [ResponseType(typeof (BasketballTeam))]
+        public IHttpActionResult AddPlayerToTeam(AddPlayerToTeamCommand command)
+        {
+            var result = _addPlayerToTeamCommandHandler.Handle(command);
+
+            return Ok(result);
         }
 
         protected override void Dispose(bool disposing)

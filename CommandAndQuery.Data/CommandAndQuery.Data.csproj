@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201605190314571_UpdatingPlayerToMakeBasketballFkNullable.Designer.cs">
       <DependentUpon>201605190314571_UpdatingPlayerToMakeBasketballFkNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605190338392_Test.cs" />
+    <Compile Include="Migrations\201605190338392_Test.Designer.cs">
+      <DependentUpon>201605190338392_Test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605190314571_UpdatingPlayerToMakeBasketballFkNullable.resx">
       <DependentUpon>201605190314571_UpdatingPlayerToMakeBasketballFkNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605190338392_Test.resx">
+      <DependentUpon>201605190338392_Test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
