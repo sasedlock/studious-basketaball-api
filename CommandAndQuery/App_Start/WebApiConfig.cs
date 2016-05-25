@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Web.Http;
 using CommandAndQuery.Command.CommandHandlers;
 using CommandAndQuery.Command.Interfaces;
 using CommandAndQuery.Domain.Models;
+using MediatR;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using StructureMap;
 
 namespace CommandAndQuery
 {
@@ -20,7 +23,24 @@ namespace CommandAndQuery
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-           // Web API routes
+            // Configure StructureMap
+            var container = new Container(cfg =>
+            {
+                cfg.Scan(scanner =>
+                {
+                    scanner.AssemblyContainingType<Ping>();
+                    scanner.AssemblyContainingType<IMediator>();
+                    scanner.WithDefaultConventions();
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
+                });
+                cfg.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+                cfg.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+            });
+
+            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
