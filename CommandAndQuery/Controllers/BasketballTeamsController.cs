@@ -17,6 +17,11 @@ namespace CommandAndQuery.Controllers
         private readonly BasketballTeamCreateCommandHandler _createCommandHandler = new BasketballTeamCreateCommandHandler();
         private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler = new AddPlayerToTeamCommandHandler();
 
+        //public BasketballTeamsController(IMediator mediator)
+        //{
+        //    _mediator = mediator;
+        //}
+
         // GET: api/BasketballTeams
         public IQueryable<BasketballTeam> GetTeams()
         {

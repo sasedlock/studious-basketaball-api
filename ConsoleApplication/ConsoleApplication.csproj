@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{50D43A2C-6FED-43E4-95BE-0592F11E68BE}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{557BD9D1-107B-41B6-B7BB-DEA6C1C7A42E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommandAndQuery.Mediator</RootNamespace>
-    <AssemblyName>CommandAndQuery.Mediator</AssemblyName>
+    <RootNamespace>ConsoleApplication</RootNamespace>
+    <AssemblyName>ConsoleApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,23 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IMediator.cs" />
-    <Compile Include="BasketballMediator.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommandAndQuery.Command\CommandAndQuery.Command.csproj">
       <Project>{C85F09EA-23A4-4122-B519-43FB2791DD07}</Project>
       <Name>CommandAndQuery.Command</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommandAndQuery.Domain\CommandAndQuery.Domain.csproj">
-      <Project>{3F3492CF-8DB4-4887-A060-DF5321E3CFD8}</Project>
-      <Name>CommandAndQuery.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommandAndQuery.Query\CommandAndQuery.Query.csproj">
-      <Project>{28C28BE0-6C25-4567-B634-FD782045F335}</Project>
-      <Name>CommandAndQuery.Query</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

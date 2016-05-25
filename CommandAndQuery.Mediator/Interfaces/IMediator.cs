@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using CommandAndQuery.Command.Interfaces;
+using CommandAndQuery.Domain.Models;
 using CommandAndQuery.Query.Interfaces;
 
 namespace CommandAndQuery.Mediator.Interfaces

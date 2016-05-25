@@ -4,7 +4,7 @@ using CommandAndQuery.Domain.Models;
 
 namespace CommandAndQuery.Command.CommandHandlers
 {
-    public class BasketballTeamCreateCommandHandler 
+    public class BasketballTeamCreateCommandHandler
         : CommandHandler<BasketballTeamCreateCommand, BasketballTeam>
     {
         private readonly BasketballContext _context;
