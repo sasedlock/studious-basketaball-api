@@ -14,7 +14,6 @@ namespace CommandAndQuery.DependencyInjection
         {
             Scan(scanner =>
             {
-                scanner.AssemblyContainingType<Ping>();
                 scanner.AssemblyContainingType<IMediator>();
                 scanner.WithDefaultConventions();
                 scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
