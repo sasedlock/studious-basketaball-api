@@ -7,6 +7,7 @@ using System.Web.Http.Description;
 using CommandAndQuery.Command.CommandHandlers;
 using CommandAndQuery.Data;
 using CommandAndQuery.Domain.Models;
+using MediatR;
 
 namespace CommandAndQuery.Controllers
 {
@@ -16,11 +17,12 @@ namespace CommandAndQuery.Controllers
         private readonly BasketballTeamEditCommandHandler _editCommandHandler = new BasketballTeamEditCommandHandler();
         private readonly BasketballTeamCreateCommandHandler _createCommandHandler = new BasketballTeamCreateCommandHandler();
         private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler = new AddPlayerToTeamCommandHandler();
+        private readonly IMediator _mediator;
 
-        //public BasketballTeamsController(IMediator mediator)
-        //{
-        //    _mediator = mediator;
-        //}
+        public BasketballTeamsController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         // GET: api/BasketballTeams
         public IQueryable<BasketballTeam> GetTeams()

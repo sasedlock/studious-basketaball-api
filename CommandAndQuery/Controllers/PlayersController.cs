@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CommandAndQuery.Command.CommandHandlers;
 using CommandAndQuery.Data;
 using CommandAndQuery.Domain.Models;
+using CommandAndQuery.Mediators;
+using MediatR;
 
 namespace CommandAndQuery.Controllers
 {
@@ -16,9 +19,25 @@ namespace CommandAndQuery.Controllers
         private PlayerEditCommandHandler _editCommandHandler = new PlayerEditCommandHandler();
         private PlayerCreateCommandHandler _createCommandHandler = new PlayerCreateCommandHandler();
 
+        private IMediator _mediator;
+
+        public PlayersController(BasketballMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         public IEnumerable<Player> GetPlayers()
         {
             return db.Players;
+        }
+
+        [HttpGet]
+        [Route("~/api/players/test")]
+        public IHttpActionResult Test()
+        {
+            var result = _mediator.Send(default(IRequest));
+
+            return Ok(result);
         }
 
         [ResponseType(typeof (Player))]
