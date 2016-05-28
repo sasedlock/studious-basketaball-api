@@ -16,9 +16,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace CommandAndQuery.DependencyResolution {
+    using StructureMap;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
-	
+
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 

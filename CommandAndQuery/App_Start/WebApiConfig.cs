@@ -30,6 +30,10 @@ namespace CommandAndQuery
                 cfg.AddRegistry<MediatorRegistry>();
             });
 
+            config.Formatters.JsonFormatter
+                        .SerializerSettings
+                        .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 

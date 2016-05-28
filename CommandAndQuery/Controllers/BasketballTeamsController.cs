@@ -7,6 +7,7 @@ using System.Web.Http.Description;
 using CommandAndQuery.Command.CommandHandlers;
 using CommandAndQuery.Data;
 using CommandAndQuery.Domain.Models;
+using CommandAndQuery.Mediators;
 using MediatR;
 
 namespace CommandAndQuery.Controllers
@@ -19,10 +20,12 @@ namespace CommandAndQuery.Controllers
         private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler = new AddPlayerToTeamCommandHandler();
         private readonly IMediator _mediator;
 
-        public BasketballTeamsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        //public BasketballTeamsController() {} : this(new BasketballMediator()) { }
+
+        //public BasketballTeamsController(IMediator mediator)
+        //{
+        //    _mediator = mediator;
+        //}
 
         // GET: api/BasketballTeams
         public IQueryable<BasketballTeam> GetTeams()

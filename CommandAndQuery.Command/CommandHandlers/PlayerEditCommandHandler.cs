@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CommandAndQuery.Command.Interfaces;
 using CommandAndQuery.Data;
+using CommandAndQuery.Data.Repositories;
 using CommandAndQuery.Domain.Models;
 
 namespace CommandAndQuery.Command.CommandHandlers
@@ -8,24 +9,25 @@ namespace CommandAndQuery.Command.CommandHandlers
     public class PlayerEditCommandHandler 
         : CommandHandler<PlayerEditCommand, Player>
     {
-        private readonly BasketballContext _context;
+        private readonly PlayerRepository _repository;
 
-        public PlayerEditCommandHandler(BasketballContext context)
+        public PlayerEditCommandHandler(PlayerRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        public PlayerEditCommandHandler() : this(new BasketballContext()) { }
+        public PlayerEditCommandHandler() : this(new PlayerRepository()) { }
 
         public override Player Handle(PlayerEditCommand command)
         {
-            var playerToEdit = _context.Players.FirstOrDefault(p => p.Id == command.Id);
+            var playerToEdit = _repository.GetById(command.Id);
 
             playerToEdit.FirstName = command.FirstName;
             playerToEdit.LastName = command.LastName;
             playerToEdit.Position = command.Position;
 
-            _context.SaveChanges();
+            _repository.Edit(playerToEdit);
+            _repository.SaveChanges();
 
             return playerToEdit;
         }

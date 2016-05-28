@@ -19,26 +19,28 @@ namespace CommandAndQuery.Controllers
         private PlayerEditCommandHandler _editCommandHandler = new PlayerEditCommandHandler();
         private PlayerCreateCommandHandler _createCommandHandler = new PlayerCreateCommandHandler();
 
-        private IMediator _mediator;
+        //private IMediator _mediator;
 
-        public PlayersController(BasketballMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        //public PlayersController() : this(new BasketballMediator()) { }
+
+        //public PlayersController(BasketballMediator mediator)
+        //{
+        //    _mediator = mediator;
+        //}
 
         public IEnumerable<Player> GetPlayers()
         {
             return db.Players;
         }
 
-        [HttpGet]
-        [Route("~/api/players/test")]
-        public IHttpActionResult Test()
-        {
-            var result = _mediator.Send(default(IRequest));
+        //[HttpGet]
+        //[Route("~/api/players/test")]
+        //public IHttpActionResult Test()
+        //{
+        //    var result = _mediator.Send(default(IRequest));
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
         [ResponseType(typeof (Player))]
         public IHttpActionResult GetPlayer(int id)

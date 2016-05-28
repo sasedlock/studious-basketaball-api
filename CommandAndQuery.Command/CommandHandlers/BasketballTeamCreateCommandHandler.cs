@@ -1,5 +1,6 @@
 ﻿using CommandAndQuery.Command.Interfaces;
 using CommandAndQuery.Data;
+using CommandAndQuery.Data.Repositories;
 using CommandAndQuery.Domain.Models;
 
 namespace CommandAndQuery.Command.CommandHandlers
@@ -7,14 +8,14 @@ namespace CommandAndQuery.Command.CommandHandlers
     public class BasketballTeamCreateCommandHandler
         : CommandHandler<BasketballTeamCreateCommand, BasketballTeam>
     {
-        private readonly BasketballContext _context;
+        private readonly BasketballTeamRepository _repository;
 
-        public BasketballTeamCreateCommandHandler(BasketballContext context)
+        public BasketballTeamCreateCommandHandler(BasketballTeamRepository repository)
         {
-            _context = context;
-        }    
+            _repository = repository;
+        }
 
-        public BasketballTeamCreateCommandHandler() : this(new BasketballContext()) { }
+        public BasketballTeamCreateCommandHandler() : this(new BasketballTeamRepository()) { }
 
         public override BasketballTeam Handle(BasketballTeamCreateCommand command)
         {
@@ -24,9 +25,8 @@ namespace CommandAndQuery.Command.CommandHandlers
                 Name = command.Name
             };
 
-            _context.Teams.Add(teamToCreate);
-
-            _context.SaveChanges();
+            _repository.Add(teamToCreate);
+            _repository.SaveChanges();
 
             return teamToCreate;
         }

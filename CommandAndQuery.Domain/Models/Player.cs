@@ -1,6 +1,8 @@
-﻿namespace CommandAndQuery.Domain.Models
+﻿using CommandAndQuery.Domain.Interfaces;
+
+namespace CommandAndQuery.Domain.Models
 {
-    public class Player
+    public class Player : IModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

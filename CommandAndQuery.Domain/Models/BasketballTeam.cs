@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using CommandAndQuery.Domain.Interfaces;
 
 namespace CommandAndQuery.Domain.Models
 {
-    public class BasketballTeam
+    public class BasketballTeam : IModel
     {
         public BasketballTeam()
         {
