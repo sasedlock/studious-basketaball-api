@@ -16,8 +16,8 @@ namespace CommandAndQuery.Controllers
     {
         private BasketballContext db = new BasketballContext();
 
-        private PlayerEditCommandHandler _editCommandHandler = new PlayerEditCommandHandler();
-        private PlayerCreateCommandHandler _createCommandHandler = new PlayerCreateCommandHandler();
+        private PlayerEditCommandHandler _editCommandHandler;
+        private PlayerCreateCommandHandler _createCommandHandler;
 
         //private IMediator _mediator;
 
@@ -27,6 +27,14 @@ namespace CommandAndQuery.Controllers
         //{
         //    _mediator = mediator;
         //}
+
+        public PlayersController(
+            PlayerEditCommandHandler playerEditCommandHandler,
+            PlayerCreateCommandHandler playerCreateCommandHandler)
+        {
+            _editCommandHandler = playerEditCommandHandler;
+            _createCommandHandler = playerCreateCommandHandler;
+        }
 
         public IEnumerable<Player> GetPlayers()
         {

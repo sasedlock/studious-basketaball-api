@@ -9,14 +9,14 @@ namespace CommandAndQuery.Command.CommandHandlers
     public class PlayerEditCommandHandler 
         : CommandHandler<PlayerEditCommand, Player>
     {
-        private readonly PlayerRepository _repository;
+        private readonly IRepository<Player> _repository;
 
-        public PlayerEditCommandHandler(PlayerRepository repository)
+        public PlayerEditCommandHandler(IRepository<Player> repository)
         {
             _repository = repository;
         }
 
-        public PlayerEditCommandHandler() : this(new PlayerRepository()) { }
+        //public PlayerEditCommandHandler() : this(new PlayerRepository()) { }
 
         public override Player Handle(PlayerEditCommand command)
         {

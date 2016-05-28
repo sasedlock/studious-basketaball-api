@@ -11,5 +11,6 @@ namespace CommandAndQuery.Data
         void Add(T model);
         void Edit(T model);
         void SaveChanges();
+        T AddPlayerToTeam(int teamId, int playerId);
     }
 }

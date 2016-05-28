@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using CommandAndQuery.Domain.Models;
 
@@ -32,6 +33,11 @@ namespace CommandAndQuery.Data.Repositories
         {
             _context.Players.Attach(model);
             _context.Entry(model).State = EntityState.Modified;
+        }
+
+        public Player AddPlayerToTeam(int teamId, int playerId)
+        {
+            throw new NotImplementedException();
         }
 
         public void SaveChanges()

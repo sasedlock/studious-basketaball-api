@@ -8,14 +8,14 @@ namespace CommandAndQuery.Command.CommandHandlers
     public class PlayerCreateCommandHandler
         : CommandHandler<PlayerCreateCommand, Player>
     {
-        private readonly PlayerRepository _repository;
+        private readonly IRepository<Player> _repository;
 
-        public PlayerCreateCommandHandler(PlayerRepository repository)
+        public PlayerCreateCommandHandler(IRepository<Player> repository)
         {
             _repository = repository;
         }
 
-        public PlayerCreateCommandHandler() : this(new PlayerRepository()) { }
+        //public PlayerCreateCommandHandler() : this(new PlayerRepository()) { }
 
         public override Player Handle(PlayerCreateCommand commmand)
         {

@@ -8,14 +8,14 @@ namespace CommandAndQuery.Command.CommandHandlers
     public class BasketballTeamCreateCommandHandler
         : CommandHandler<BasketballTeamCreateCommand, BasketballTeam>
     {
-        private readonly BasketballTeamRepository _repository;
+        private readonly IRepository<BasketballTeam> _repository;
 
-        public BasketballTeamCreateCommandHandler(BasketballTeamRepository repository)
+        public BasketballTeamCreateCommandHandler(IRepository<BasketballTeam> repository)
         {
             _repository = repository;
         }
 
-        public BasketballTeamCreateCommandHandler() : this(new BasketballTeamRepository()) { }
+        //public BasketballTeamCreateCommandHandler() : this(new BasketballTeamRepository()) { }
 
         public override BasketballTeam Handle(BasketballTeamCreateCommand command)
         {

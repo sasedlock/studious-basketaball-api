@@ -15,9 +15,9 @@ namespace CommandAndQuery.Controllers
     public class BasketballTeamsController : ApiController
     {
         private readonly BasketballContext db = new BasketballContext();
-        private readonly BasketballTeamEditCommandHandler _editCommandHandler = new BasketballTeamEditCommandHandler();
-        private readonly BasketballTeamCreateCommandHandler _createCommandHandler = new BasketballTeamCreateCommandHandler();
-        private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler = new AddPlayerToTeamCommandHandler();
+        private readonly BasketballTeamEditCommandHandler _editCommandHandler;
+        private readonly BasketballTeamCreateCommandHandler _createCommandHandler;
+        private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler;
         private readonly IMediator _mediator;
 
         //public BasketballTeamsController() {} : this(new BasketballMediator()) { }
@@ -26,6 +26,16 @@ namespace CommandAndQuery.Controllers
         //{
         //    _mediator = mediator;
         //}
+
+        public BasketballTeamsController(
+            BasketballTeamEditCommandHandler editCommandHandler,
+            BasketballTeamCreateCommandHandler createCommandHandler,
+            AddPlayerToTeamCommandHandler addPlayerToTeamCommandHandler)
+        {
+            _editCommandHandler = editCommandHandler;
+            _createCommandHandler = createCommandHandler;
+            _addPlayerToTeamCommandHandler = addPlayerToTeamCommandHandler;
+        }
 
         // GET: api/BasketballTeams
         public IQueryable<BasketballTeam> GetTeams()
