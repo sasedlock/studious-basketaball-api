@@ -47,10 +47,22 @@
     <Compile Include="Interfaces\IQuery.cs" />
     <Compile Include="Interfaces\IQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryHandlers\GetAllTeamsQueryHandler.cs" />
+    <Compile Include="QueryHandlers\GetTeamByIdQueryHandler.cs" />
     <Compile Include="QueryHandlers\QueryHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandAndQuery.Data\CommandAndQuery.Data.csproj">
+      <Project>{47F1A214-AE38-45D0-8BC3-B7BA8499AF6A}</Project>
+      <Name>CommandAndQuery.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandAndQuery.Domain\CommandAndQuery.Domain.csproj">
+      <Project>{3F3492CF-8DB4-4887-A060-DF5321E3CFD8}</Project>
+      <Name>CommandAndQuery.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

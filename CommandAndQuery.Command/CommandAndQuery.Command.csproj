@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\AddPlayerToTeamCommandHandler.cs" />
     <Compile Include="CommandHandlers\BasketballTeamCreateCommandHandler.cs" />
+    <Compile Include="CommandHandlers\BasketballTeamDeleteCommandHandler.cs" />
     <Compile Include="CommandHandlers\BasketballTeamEditCommandHandler.cs" />
     <Compile Include="CommandHandlers\CommandHandler.cs" />
     <Compile Include="CommandHandlers\PlayerCreateCommandHandler.cs" />

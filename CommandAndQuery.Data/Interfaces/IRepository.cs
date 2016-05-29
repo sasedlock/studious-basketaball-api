@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CommandAndQuery.Domain.Interfaces;
+using MediatR;
 
 namespace CommandAndQuery.Data
 {
@@ -11,6 +12,7 @@ namespace CommandAndQuery.Data
         void Add(T model);
         void Edit(T model);
         void SaveChanges();
+        Unit Delete(T model);
         T AddPlayerToTeam(int teamId, int playerId);
     }
 }

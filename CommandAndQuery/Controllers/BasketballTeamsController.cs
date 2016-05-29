@@ -1,20 +1,22 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CommandAndQuery.Command.CommandHandlers;
 using CommandAndQuery.Data;
 using CommandAndQuery.Domain.Models;
 using CommandAndQuery.Mediators;
+using CommandAndQuery.Query.QueryHandlers;
 using MediatR;
 
 namespace CommandAndQuery.Controllers
 {
     public class BasketballTeamsController : ApiController
     {
-        private readonly BasketballContext db = new BasketballContext();
         private readonly IMediator _mediator;
 
         public BasketballTeamsController(IMediator mediator)
@@ -23,16 +25,18 @@ namespace CommandAndQuery.Controllers
         }
 
         // GET: api/BasketballTeams
-        public IQueryable<BasketballTeam> GetTeams()
+        //[Route("~api/basketballteams/getall")]
+        public IEnumerable<BasketballTeam> GetTeams()
         {
-            return db.Teams;
+            return _mediator.Send(new GetAllTeamsQuery());
         }
 
         // GET: api/BasketballTeams/5
         [ResponseType(typeof(BasketballTeam))]
         public IHttpActionResult GetBasketballTeam(int id)
         {
-            BasketballTeam basketballTeam = db.Teams.Find(id);
+            var query = new GetTeamByIdQuery() { TeamId = id};
+            var basketballTeam = _mediator.Send(query);
             if (basketballTeam == null)
             {
                 return NotFound();
@@ -51,6 +55,7 @@ namespace CommandAndQuery.Controllers
         }
 
         // POST: api/BasketballTeams
+        [HttpPost]
         [ResponseType(typeof(BasketballTeam))]
         public IHttpActionResult PostBasketballTeam(BasketballTeamCreateCommand createCommand)
         {
@@ -65,43 +70,22 @@ namespace CommandAndQuery.Controllers
         }
 
         // DELETE: api/BasketballTeams/5
-        [ResponseType(typeof(BasketballTeam))]
-        public IHttpActionResult DeleteBasketballTeam(int id)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteBasketballTeam(BasketballTeamDeleteCommand command)
         {
-            BasketballTeam basketballTeam = db.Teams.Find(id);
-            if (basketballTeam == null)
-            {
-                return NotFound();
-            }
+            _mediator.Send(command);
 
-            db.Teams.Remove(basketballTeam);
-            db.SaveChanges();
-
-            return Ok(basketballTeam);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         [HttpPost]
         [Route("api/basketballteams/addplayertoteam")]
-        [ResponseType(typeof (BasketballTeam))]
+        [ResponseType(typeof(BasketballTeam))]
         public IHttpActionResult AddPlayerToTeam(AddPlayerToTeamCommand command)
         {
             var result = _mediator.Send(command);
 
             return Ok(result);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool BasketballTeamExists(int id)
-        {
-            return db.Teams.Count(e => e.Id == id) > 0;
         }
     }
 }

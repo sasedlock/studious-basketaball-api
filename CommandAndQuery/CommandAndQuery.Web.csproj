@@ -264,8 +264,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DependencyInjection\RepositoryRegistry.cs" />
-    <Compile Include="DependencyInjection\MediatorRegistry.cs" />
+    <Compile Include="StructureMapRegistries\RepositoryRegistry.cs" />
+    <Compile Include="StructureMapRegistries\MediatorRegistry.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
@@ -367,6 +367,10 @@
     <ProjectReference Include="..\CommandAndQuery.Domain\CommandAndQuery.Domain.csproj">
       <Project>{3f3492cf-8db4-4887-a060-df5321e3cfd8}</Project>
       <Name>CommandAndQuery.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandAndQuery.Query\CommandAndQuery.Query.csproj">
+      <Project>{28C28BE0-6C25-4567-B634-FD782045F335}</Project>
+      <Name>CommandAndQuery.Query</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

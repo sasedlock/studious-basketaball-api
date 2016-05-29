@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using CommandAndQuery.Domain.Models;
+using MediatR;
 
 namespace CommandAndQuery.Data.Repositories
 {
@@ -33,6 +34,11 @@ namespace CommandAndQuery.Data.Repositories
         {
             _context.Players.Attach(model);
             _context.Entry(model).State = EntityState.Modified;
+        }
+
+        public Unit Delete(Player model)
+        {
+            return new Unit();
         }
 
         public Player AddPlayerToTeam(int teamId, int playerId)
