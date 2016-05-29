@@ -15,26 +15,11 @@ namespace CommandAndQuery.Controllers
     public class BasketballTeamsController : ApiController
     {
         private readonly BasketballContext db = new BasketballContext();
-        private readonly BasketballTeamEditCommandHandler _editCommandHandler;
-        private readonly BasketballTeamCreateCommandHandler _createCommandHandler;
-        private readonly AddPlayerToTeamCommandHandler _addPlayerToTeamCommandHandler;
         private readonly IMediator _mediator;
 
-        //public BasketballTeamsController() {} : this(new BasketballMediator()) { }
-
-        //public BasketballTeamsController(IMediator mediator)
-        //{
-        //    _mediator = mediator;
-        //}
-
-        public BasketballTeamsController(
-            BasketballTeamEditCommandHandler editCommandHandler,
-            BasketballTeamCreateCommandHandler createCommandHandler,
-            AddPlayerToTeamCommandHandler addPlayerToTeamCommandHandler)
+        public BasketballTeamsController(IMediator mediator)
         {
-            _editCommandHandler = editCommandHandler;
-            _createCommandHandler = createCommandHandler;
-            _addPlayerToTeamCommandHandler = addPlayerToTeamCommandHandler;
+            _mediator = mediator;
         }
 
         // GET: api/BasketballTeams
@@ -60,14 +45,13 @@ namespace CommandAndQuery.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBasketballTeam(int id, BasketballTeamEditCommand editCommand)
         {
-            _editCommandHandler.Handle(editCommand);
+            _mediator.Send(editCommand);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/BasketballTeams
         [ResponseType(typeof(BasketballTeam))]
-        //public IHttpActionResult PostBasketballTeam(BasketballTeam basketballTeam)
         public IHttpActionResult PostBasketballTeam(BasketballTeamCreateCommand createCommand)
         {
             if (!ModelState.IsValid)
@@ -75,10 +59,7 @@ namespace CommandAndQuery.Controllers
                 return BadRequest(ModelState);
             }
 
-            var basketballTeam = _createCommandHandler.Handle(createCommand);
-
-            //db.Teams.Add(basketballTeam);
-            //db.SaveChanges();
+            var basketballTeam = _mediator.Send(createCommand);
 
             return CreatedAtRoute("DefaultApi", new { id = basketballTeam.Id }, basketballTeam);
         }
@@ -104,7 +85,7 @@ namespace CommandAndQuery.Controllers
         [ResponseType(typeof (BasketballTeam))]
         public IHttpActionResult AddPlayerToTeam(AddPlayerToTeamCommand command)
         {
-            var result = _addPlayerToTeamCommandHandler.Handle(command);
+            var result = _mediator.Send(command);
 
             return Ok(result);
         }

@@ -12,9 +12,21 @@ namespace CommandAndQuery.DependencyInjection
     {
         public MediatorRegistry()
         {
+            var assemblies = new[]
+            {
+                "CommandAndQuery.Command",
+                "CommandAndQuery.Query",
+                "CommandAndQuery"
+            };
+            
             Scan(scanner =>
             {
+                foreach (var assembly in assemblies)
+                {
+                    scanner.Assembly(assembly);
+                }
                 scanner.AssemblyContainingType<IMediator>();
+                
                 scanner.WithDefaultConventions();
                 scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
                 scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));

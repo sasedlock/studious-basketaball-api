@@ -15,40 +15,17 @@ namespace CommandAndQuery.Controllers
     public class PlayersController : ApiController
     {
         private BasketballContext db = new BasketballContext();
+        private IMediator _mediator;
 
-        private PlayerEditCommandHandler _editCommandHandler;
-        private PlayerCreateCommandHandler _createCommandHandler;
-
-        //private IMediator _mediator;
-
-        //public PlayersController() : this(new BasketballMediator()) { }
-
-        //public PlayersController(BasketballMediator mediator)
-        //{
-        //    _mediator = mediator;
-        //}
-
-        public PlayersController(
-            PlayerEditCommandHandler playerEditCommandHandler,
-            PlayerCreateCommandHandler playerCreateCommandHandler)
+        public PlayersController(IMediator mediator)
         {
-            _editCommandHandler = playerEditCommandHandler;
-            _createCommandHandler = playerCreateCommandHandler;
+            _mediator = mediator;
         }
 
         public IEnumerable<Player> GetPlayers()
         {
             return db.Players;
         }
-
-        //[HttpGet]
-        //[Route("~/api/players/test")]
-        //public IHttpActionResult Test()
-        //{
-        //    var result = _mediator.Send(default(IRequest));
-
-        //    return Ok(result);
-        //}
 
         [ResponseType(typeof (Player))]
         public IHttpActionResult GetPlayer(int id)
@@ -65,7 +42,7 @@ namespace CommandAndQuery.Controllers
         [ResponseType(typeof (void))]
         public IHttpActionResult PutPlayer(int id, PlayerEditCommand command)
         {
-            _editCommandHandler.Handle(command);
+            _mediator.Send(command);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -78,7 +55,7 @@ namespace CommandAndQuery.Controllers
                 return BadRequest(ModelState);
             }
 
-            var player = _createCommandHandler.Handle(command);
+            var player = _mediator.Send(command);
 
             return CreatedAtRoute("DefaultApi", new {id = player.Id}, player);
         }
